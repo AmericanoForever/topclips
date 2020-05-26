@@ -2,7 +2,7 @@ const clientId = 'yv2ws9845uioyt0eavfuyzxk5rc8hz';
 const pageSize = 30;
 
 async function getTopClips(period, cursor) {
-    const r = await fetch(`https://api.twitch.tv/kraken/clips/top?period=${period}&limit=${pageSize}` + (cursor ? `&cursor=${cursor}` : ''), {
+    const r = await fetch(`https://api.twitch.tv/kraken/clips/top?period=${period}&limit=${pageSize}` + (cursor ? `&cursor=${cursor}` : '') + (document.koOnly ? '&language=ko' : ''), {
         method: 'GET',
         headers: {
         'Client-ID': clientId,
@@ -32,20 +32,14 @@ function loadClips(period, cursor) {
         const startIndex = list.childElementCount;
         for(i = 0; i < r.clips.length; i++) {
             const clip = r.clips[i];
-            if(document.koOnly) {
-                if(clip.language != 'ko') {
-                    continue;
-                }
-            }
             const row = document.createElement('tr');
-
-            if(!document.koOnly) {
-                const tdIndex = document.createElement('td');
-                const index = document.createElement('p');
-                index.innerHTML = `<p>${startIndex+i+1}</p>`
-                tdIndex.appendChild(index);
-                row.appendChild(tdIndex);
-            }
+            
+            const tdIndex = document.createElement('td');
+            const index = document.createElement('p');
+            index.innerHTML = `<p>${startIndex+i+1}</p>`
+            tdIndex.appendChild(index);
+            row.appendChild(tdIndex);
+            
             const tdImg = document.createElement('td');
             const img = document.createElement('img');
             img.addEventListener('click', function() {
