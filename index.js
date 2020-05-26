@@ -2,7 +2,7 @@ const clientId = 'yv2ws9845uioyt0eavfuyzxk5rc8hz';
 const pageSize = 30;
 
 async function getTopClips(period, cursor) {
-    const r = await fetch(`https://api.twitch.tv/kraken/clips/top?period=${period}&limit=${pageSize}`, {
+    const r = await fetch(`https://api.twitch.tv/kraken/clips/top?period=${period}&limit=${pageSize}` + (cursor ? `&cursor=${cursor}` : ''), {
         method: 'GET',
         headers: {
         'Client-ID': clientId,
@@ -25,10 +25,19 @@ function addMetadata(clip) {
 
 function loadClips(period, cursor) {
     document.period = period;
-    getTopClips(period).then(r => {
+    const list = document.getElementById('clipslist');
+    getTopClips(period, cursor).then(r => {
+        const startIndex = list.childElementCount;
         for(i = 0; i < r.clips.length; i++) {
             const clip = r.clips[i];
             const row = document.createElement('tr');
+
+            const tdIndex = document.createElement('td');
+            const index = document.createElement('p');
+            index.innerHTML = `<p>${startIndex+i+1}</p>`
+            tdIndex.appendChild(index);
+            row.appendChild(tdIndex);
+
             const tdImg = document.createElement('td');
             const img = document.createElement('img');
             img.addEventListener('click', function() {
@@ -38,12 +47,14 @@ function loadClips(period, cursor) {
             img.setAttribute('src', clip.thumbnails.small);
             tdImg.appendChild(img);
             row.appendChild(tdImg);
+
             const tdMetadata = document.createElement('td');
             tdMetadata.innerHTML = addMetadata(clip);
             row.appendChild(tdMetadata);
+
             list.appendChild(row);
-            document.cursor = clip._cursor
         }
+        document.cursor = r._cursor;
     });
 }
 
