@@ -18,7 +18,7 @@ function addMetadata(clip) {
     Title: ${clip.title}
     Category: ${clip.game}
     Views: ${clip.views}
-    Date: ${new Date(clip.created_at)}
+    Date: ${moment(clip.created_at).format('YYYY/MM/DD h:mm a')}
     </pre>`;
     return metadataDiv;
 }
