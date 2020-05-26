@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+  <head>
+    <title>TopClips</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script async src="./index.js"></script>
+  </head>
+  <body>
+    <input id="day" type="button" value="Day" />
+    <input id="week" type="button" value="Week" />
+    <input id="month" type="button" value="Month" />
+    <input id="all" type="button" value="All" />
+    <table id='clipslist'></table>
+    <input id="more" type="button" value="Load More" />
+    <div style="position:fixed;top:40px;right:40px;z-index:10">
+        <iframe
+            id='clipvideo'
+            height="288"
+            width="512"
+            style="padding:10px;"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="true">
+      </iframe>
+    </div>
+  </body>
+</html>
