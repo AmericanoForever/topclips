@@ -7,17 +7,21 @@
     <script async src="./index.js"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   </head>
-  <body>
-    <form>
-        <input id="day" type="radio" value="Day" name="period" />
-        <label for="male">Day</label>
-        <input id="week" type="radio" value="Week" name="period" />
-        <label for="male">Week</label>
-        <input id="month" type="radio" value="Month" name="period" />
-        <label for="male">Month</label>
-        <input id="all" type="radio" value="All" name="period" />
-        <label for="male">All</label>
-    </form>
+  <body id="body">
+    <input id="day" type="radio" value="Day" name="period" />
+    <label for="male">Day</label>
+    <input id="week" type="radio" value="Week" name="period" />
+    <label for="male">Week</label>
+    <input id="month" type="radio" value="Month" name="period" />
+    <label for="male">Month</label>
+    <input id="all" type="radio" value="All" name="period" />
+    <label for="male">All</label>
+    <div>
+      <label class="switch">
+        <input id="koOnly" type="checkbox">
+        <span class="slider round">Ko Only</span>
+      </label>
+    </div>
     <table id='clipslist'></table>
     <input id="more" type="button" value="Load More" />
     <div style="position:fixed;top:40px;right:40px;z-index:10">

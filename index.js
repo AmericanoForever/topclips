@@ -26,18 +26,26 @@ function addMetadata(clip) {
 function loadClips(period, cursor) {
     document.period = period;
     const list = document.getElementById('clipslist');
+    const prePos = window.pageYOffset ;
+    console.log(prePos);
     getTopClips(period, cursor).then(r => {
         const startIndex = list.childElementCount;
         for(i = 0; i < r.clips.length; i++) {
             const clip = r.clips[i];
+            if(document.koOnly) {
+                if(clip.language != 'ko') {
+                    continue;
+                }
+            }
             const row = document.createElement('tr');
 
-            const tdIndex = document.createElement('td');
-            const index = document.createElement('p');
-            index.innerHTML = `<p>${startIndex+i+1}</p>`
-            tdIndex.appendChild(index);
-            row.appendChild(tdIndex);
-
+            if(!document.koOnly) {
+                const tdIndex = document.createElement('td');
+                const index = document.createElement('p');
+                index.innerHTML = `<p>${startIndex+i+1}</p>`
+                tdIndex.appendChild(index);
+                row.appendChild(tdIndex);
+            }
             const tdImg = document.createElement('td');
             const img = document.createElement('img');
             img.addEventListener('click', function() {
@@ -56,6 +64,7 @@ function loadClips(period, cursor) {
         }
         document.cursor = r._cursor;
     });
+    window.scrollTo(0, prePos - 40);
 }
 
 function loadMore(period) {
@@ -64,6 +73,7 @@ function loadMore(period) {
 
 loadClips('all');
 document.getElementById("all").checked = true;
+document.getElementById('koOnly').checked = false;
 
 document.getElementById('day').addEventListener('click', function() {
     const list = document.getElementById('clipslist');
@@ -91,4 +101,12 @@ document.getElementById('all').addEventListener('click', function() {
 
 document.getElementById('more').addEventListener('click', function() {
     loadMore(document.period);
+});
+
+document.getElementById('koOnly').addEventListener('click', function() {
+    const list = document.getElementById('clipslist');
+    list.innerHTML = '';
+    const koCB = document.getElementById('koOnly');
+    document.koOnly = koCB.checked;
+    loadClips(document.period);
 });
