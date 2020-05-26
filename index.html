@@ -8,10 +8,16 @@
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   </head>
   <body>
-    <input id="day" type="button" value="Day" />
-    <input id="week" type="button" value="Week" />
-    <input id="month" type="button" value="Month" />
-    <input id="all" type="button" value="All" />
+    <form>
+        <input id="day" type="radio" value="Day" name="period" />
+        <label for="male">Day</label>
+        <input id="week" type="radio" value="Week" name="period" />
+        <label for="male">Week</label>
+        <input id="month" type="radio" value="Month" name="period" />
+        <label for="male">Month</label>
+        <input id="all" type="radio" value="All" name="period" />
+        <label for="male">All</label>
+    </form>
     <table id='clipslist'></table>
     <input id="more" type="button" value="Load More" />
     <div style="position:fixed;top:40px;right:40px;z-index:10">

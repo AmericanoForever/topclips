@@ -63,6 +63,7 @@ function loadMore(period) {
 }
 
 loadClips('all');
+document.getElementById("all").checked = true;
 
 document.getElementById('day').addEventListener('click', function() {
     const list = document.getElementById('clipslist');
