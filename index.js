@@ -13,12 +13,18 @@ async function getTopClips(period, cursor) {
 }
 
 function addMetadata(clip) {
+    var since = undefined;
+    const clipTime = moment(clip.created_at);
+    if (document.period === 'day') {
+        const now = moment(new Date());
+        since = moment.duration(now.diff(clipTime));
+    }
     const metadataDiv = `<pre>
     Channel: ${clip.broadcaster.display_name}
     Title: ${clip.title}
     Category: ${clip.game}
     Views: ${clip.views}
-    Date: ${moment(clip.created_at).format('YYYY/MM/DD h:mm a')}
+    Date: ${clipTime.format('YYYY/MM/DD h:mm a')}${since ? ' (' + Math.floor(since.asHours()) + ' hrs ago)' : ''}
     </pre>`;
     return metadataDiv;
 }
