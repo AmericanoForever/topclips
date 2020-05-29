@@ -71,9 +71,10 @@ function loadMore(period) {
     loadClips(period, document.cursor);
 }
 
-loadClips('all');
-document.getElementById("all").checked = true;
-document.getElementById('koOnly').checked = false;
+document.getElementById("day").checked = true;
+document.getElementById('koOnly').checked = true;
+document.koOnly = true;
+loadClips('day');
 
 document.getElementById('day').addEventListener('click', function() {
     const list = document.getElementById('clipslist');
