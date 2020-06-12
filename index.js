@@ -50,7 +50,7 @@ function loadClips(period, cursor) {
             const img = document.createElement('img');
             img.addEventListener('click', function() {
                 const videoIframe = document.getElementById('clipvideo');
-                videoIframe.setAttribute('src', clip.embed_url+"&autoplay=false");
+                videoIframe.setAttribute('src', clip.embed_url+"&autoplay=false&parent=rinheeforever.github.io");
             });
             img.setAttribute('src', clip.thumbnails.small);
             tdImg.appendChild(img);
